@@ -20,15 +20,12 @@ function siteman_drush_command() {
   $items = array();
 
   $items['siteman-scan'] = array(
-    'description' => "Sitemanager: Scan all your platforms for new sites",
-    'arguments' => array(
-      'filling' => 'The type of the sandwich (turkey, cheese, etc.)',
-    ),
+    'description' => "Sitemanager: Scan all your sites and print a table with their locations (not implemented yet)",
     'options' => array(
       'siteman-platform-dir' => 'Tells Site Manager where your platforms are located',
     ),
     'examples' => array(
-      'drush siteman turkey --spreads=ketchup,mustard',
+      'drush siteman-scan',
     ),
     'aliases' => array('scan'),
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH, // No bootstrap at all.
