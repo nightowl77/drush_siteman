@@ -160,7 +160,7 @@ function drush_siteman_scan($filling = 'ascii') {
 function drush_siteman_platform_install($filename = '') {
 
   // Todo:
-  / Still in 2 minds over whether or not to force the ".make" extension
+  // Still in 2 minds over whether or not to force the ".make" extension
   if (file_exists($filename.'.make')) {
     drush_print('File found'); // "Look in current dir" stuff not tested
     $makefile = $filename.'.make';
@@ -175,7 +175,7 @@ function drush_siteman_platform_install($filename = '') {
 
   if (!$makefile)
   {
-    drush_set_error('DRUSH_SITEMAN_NO_MAKEFILE', dt('Makefile could not be found. Exiting.'));
+    drush_set_error('DRUSH_SITEMAN_NO_MAKEFILE', dt('Makefile could not be found. Remember not to pass .make when specifiying the make file. Exiting.'));
     drush_die();
   }
 
