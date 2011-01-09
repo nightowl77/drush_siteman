@@ -1,0 +1,91 @@
+Drush Site Manager Alpha 1
+
+BACKGROUND:
+
+Drush Siteman is basically a lightweight version of Aegir with the empasis on the Linux (and 
+possiblly Mac) developer. Using drush (and drushrc.php for the configuation of you directories) 
+you can quickly: 
+
+  - Install platforms from makefiles
+  
+  - Install sites to those platforms and
+      - Copy default.settings.php to settings.php
+      - Create files directory
+      - Set up very tight permissions on settings.php and files
+      - Set up a MySQL database with it's own username and password
+      - Set up Apache
+      
+  - Move sites between platforms, just like Aegir.
+  
+  - Small "bonus" options, like support for Eclipse projects
+  
+Any configuration option can be left out and Siteman will simply ignore it. If you don't 
+want this system to set up a database for whatever reason, you simply don't define it in the
+configuration. Siteman will happily continue to set up the rest of the stuff without a care
+in the world. 
+
+The system tries to be a flexible as possible (almost any location/directory and even certain
+shell commands can be configured) but in some cases there are forced constraints. Where appropriate,
+it tries to enforce good practises. For example, the system forces you to keep all your makefiles 
+in one location (works well with version control), and you cannot build multiple platforms from 
+one makefile.  There is a forced one-to-one relation from the makefile's point of view. The 
+makefile /makefiles/d7.0-devel.make will only install to /platforms/d7.0devel/. This is to keep 
+things orderly. 
+
+You can however manually install a platform in your platforms directory (for example, you
+copied it from another server) and Siteman will still read it even if there is no makefile
+for that platform. 
+
+
+COMMANDS:
+
+Once properly configured (see INSTALLATION.txt) you'll be able to execute the following 
+commands (all very similar to Aegir). The examples below use the alias/short version 
+of the command. 
+
+1.  Set up a platform from a makefile
+
+      drush siteman-platform-install <makefile> <platform>
+      
+      Example:
+        drush smpi d7.0-devel
+
+2.  Set up a site in that platform
+
+      drush siteman-site-install <platform> <sitename>
+      
+      - will install your site to the correct directory in your platform (ie sites/clientwebsite)
+      - will copy default.settings.php to settings.php, create /files directory
+      - Set the correct webserver permissions
+      - will configure apache and reload.
+      - will add the sitename to your /etc/hosts file
+      - will create a database 
+      
+      Example:
+        drush smsi d7.0-devel clientwebsite
+        
+        
+3.  Move a site between platforms
+
+      drush siteman-site-move <source_platform> <sitename> <target_platform>
+      
+      - will move all the files to new platform
+      - will update your apache configuration and reload it. 
+      
+      
+4.  List all sites and their platforms in a table
+
+      drush siteman-site-list
+      
+      (Not implemented yet)
+      
+
+5.  Delete a platform
+      (not implemented yet)
+
+
+
+KNOWN BUGS / LIMITATIONS:
+
+Too many to mention - this is still alpha. See code for "TODO's"
+
